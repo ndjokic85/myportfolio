@@ -17,3 +17,9 @@ elixir(mix => {
     mix.sass('app.scss')
        .webpack('app.js');
 });
+
+{
+  "name": "myportfolio",
+  "version": "0.1.0",
+
+}
