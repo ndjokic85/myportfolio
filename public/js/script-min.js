@@ -1,1 +1,0 @@
-function SumNumber(a){var b=0;forEach(a in num),b+=num,console.log(b)}var elements=[34,56,23];sumNumber(elements);

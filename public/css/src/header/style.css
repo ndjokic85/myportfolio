@@ -1,7 +1,10 @@
 body,html
 {
     background:#666600;
-    color:red;
+    color:#ffffff;
+}
+span
+{
     font-family: sans-serif;
 }
 

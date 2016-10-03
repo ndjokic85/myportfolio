@@ -5,56 +5,64 @@ module.exports = function (grunt) {
         concat: {
             js: {
                 src: [
-                    'public/js/libs/*.js', // All JS in the libs folder
+                    'public/js/libs/*.js','public/js/libs/**/*.js', // All JS in the libs folder
 
                 ],
-                dest: 'public/js/script.js',
+                dest: 'public/js/dest/script.js',
             },
             css:
                     {
-                        src:[
-                       'public/css/*.css',
-                       
+                        src: [
+                            'public/css/src/*.css',
+                            'public/css/src/**/*.css'
+
                         ],
-                        dest: 'public/css/style.min.css'
+                        dest: 'public/css/dest/styles.css'
                     }
-           
+
         },
         watch:
                 {
+                    css:
+                            {
+                                files: ['public/css/src/**/*.css', 'public/css/src/*.css'],
+                                tasks: ['concat'],
+                            },
                     js:
                             {
-                                files: ['public/js/libs/*.js'],
-                                tasks: ['uglify'],
+                                files: ['public/js/libs/*.js','public/js/libs/**/*.js'],
+                                tasks: ['concat','uglify'],
                             },
-                    css:
-                    {
-                        files: ['public/css/*.css'],
-                        tasks: ['cssmin'],
-                    }
-                            
-             
+                    mincss:
+                            {
+                                files: ['public/css/dest/styles.css'],
+                                tasks: ['cssmin'],
+                            }
+
+
+
+
                 },
         uglify: {
             build: {
-                src: 'public/js/libs/*.js',
-                dest: 'public/js/script-min.js',
+                src: 'public/js/dest/script.js',
+                dest: 'public/js/dest/script-min.js',
             }
         },
         cssmin:
-        {
-            my_target:
-            {
-                files:[
-            {
-                expand:true,
-                src:['public/css/*.css'],
-                dest:'',
-                ext:'.min.css'
-            }
-                ]
-            }
-        }
+                {
+                    my_target:
+                            {
+                                files: [
+                                    {
+                                        expand: true,
+                                        src: ['public/css/dest/styles.css'],
+                                        dest: '',
+                                        ext: '.min.css'
+                                    }
+                                ]
+                            }
+                }
     });
 
     // 3. Where we tell Grunt we plan to use this plug-in.
@@ -65,6 +73,6 @@ module.exports = function (grunt) {
 
 
     // 4. Where we tell Grunt what to do when we type 'grunt' into the terminal.
-    grunt.registerTask('default', ['uglify', 'concat', 'watch','cssmin']);
+    grunt.registerTask('default', ['uglify', 'concat', 'watch', 'cssmin']);
 
 };
