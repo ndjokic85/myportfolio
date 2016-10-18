@@ -1,7 +1,6 @@
-function sum()
+$(document).ready(function ()
 {
-   return 5+5;
-}
 
+});
 
 
